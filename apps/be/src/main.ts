@@ -1,20 +1,13 @@
 import { createServer } from 'node:http';
+import { txtToJson } from './txt-to-json';
 
 const API_URL =
   'https://www.cnb.cz/en/financial-markets/foreign-exchange-market/central-bank-exchange-rate-fixing/central-bank-exchange-rate-fixing/daily.txt';
 const PORT = process.env.PORT ?? 1337;
+const HEADERS = { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*.slarka.com' };
 
-const server = createServer(async (req, res) => {
-  // Ignore base, we only need search params
-  const { searchParams } = new URL(req.url ?? '', 'http://localhost');
-  const dateString = searchParams.get('date');
-  const date = dateString ? new Date(dateString) : new Date();
-
-  const params = new URLSearchParams({
-    date: `${date.getDate()}.${date.getMonth() + 1}.${date.getFullYear()}`,
-  });
-
-  const response = await fetch(`${API_URL}?${params}`);
+const server = createServer(async (_req, res) => {
+  const response = await fetch(API_URL);
 
   if (response.status !== 200) {
     res.end({});
@@ -22,30 +15,9 @@ const server = createServer(async (req, res) => {
     return;
   }
 
-  const [, header, ...data] = (await response.text()).split('\n');
+  const currencies = txtToJson(await response.text());
 
-  const keys = header.split('|').map((key) => key.toLowerCase());
-  const codeKey = keys.at(-2) ?? 'code';
-
-  const currencies = new Map<string, Record<string, string>>();
-
-  // Remove last empty line
-  data.pop();
-
-  data.forEach((row) => {
-    const rowItems = row.split('|');
-
-    const currencyData = keys.reduce<Record<string, string>>(
-      (value, key, index) => ({ ...value, [key]: rowItems[index] }),
-      {}
-    );
-
-    currencies.set(currencyData[codeKey], currencyData);
-  });
-
-  res
-    .writeHead(200, { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' })
-    .end(JSON.stringify(Object.fromEntries(currencies)));
+  res.writeHead(200, HEADERS).end(JSON.stringify(currencies));
 });
 
 server.listen(PORT);
