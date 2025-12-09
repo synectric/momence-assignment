@@ -1,0 +1,26 @@
+{
+  "name": "app",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/app/src",
+  "projectType": "application",
+  "tags": [],
+  "targets": {
+    "docker-build": {
+      "dependsOn": ["build"],
+      "command": "docker build -f apps/app/Dockerfile .",
+      "defaultConfiguration": "production",
+      "configurations": {
+        "local": {
+          "args": ["-t momence-assignment"]
+        },
+        "production": {
+          "args": ["-t cloud9.home:5000/momence-assignment:latest", "--platform linux/amd64"]
+        }
+      }
+    },
+    "publish": {
+      "dependsOn": ["docker-build"],
+      "command": "docker push cloud9.home:5000/momence-assignment:latest"
+    }
+  }
+}

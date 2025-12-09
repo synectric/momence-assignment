@@ -79,6 +79,23 @@
           "buildTarget": "be:build:production"
         }
       }
+    },
+    "docker-build": {
+      "dependsOn": ["build"],
+      "command": "docker build -f apps/be/Dockerfile .",
+      "defaultConfiguration": "production",
+      "configurations": {
+        "local": {
+          "args": ["-t momence-assignment-be"]
+        },
+        "production": {
+          "args": ["-t cloud9.home:5000/momence-assignment-be:latest", "--platform linux/amd64"]
+        }
+      }
+    },
+    "publish": {
+      "dependsOn": ["docker-build"],
+      "command": "docker push cloud9.home:5000/momence-assignment-be:latest"
     }
   }
 }

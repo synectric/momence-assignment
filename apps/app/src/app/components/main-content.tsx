@@ -18,7 +18,7 @@ type CurrencyRatesResponse = Record<string, CurrencyRate>;
 export const MainContent = () => {
   const { isPending, error, data } = useQuery<CurrencyRatesResponse, unknown, Array<CurrencyRate>>({
     queryKey: ['rates'],
-    queryFn: () => fetch('http://localhost:1337').then((res) => res.json()),
+    queryFn: () => fetch('https://momence-assignment-be.slarka.com').then((res) => res.json()),
     select: (data) => Object.values(data),
   });
 
