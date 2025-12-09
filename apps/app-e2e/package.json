@@ -1,10 +1,10 @@
 {
-  "name": "@here/app-e2e",
+  "name": "@momence-assignment/app-e2e",
   "version": "0.0.1",
   "private": true,
   "nx": {
     "implicitDependencies": [
-      "@here/app"
+      "@momence-assignment/app"
     ]
   }
 }

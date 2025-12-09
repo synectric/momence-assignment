@@ -6,7 +6,7 @@ export const theme: DefaultTheme = {
       main: '#6360e1',
       content: '#fff',
       accent: '#f5f5f5',
-      accentDark: '#f0f0f0',
+      accentDark: '#e5e5e5',
     },
     border: '#0000004d',
   },

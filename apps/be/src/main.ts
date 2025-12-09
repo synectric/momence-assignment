@@ -44,7 +44,7 @@ const server = createServer(async (req, res) => {
   });
 
   res
-    .writeHead(200, { 'Content-Type': 'application/json' })
+    .writeHead(200, { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' })
     .end(JSON.stringify(Object.fromEntries(currencies)));
 });
 

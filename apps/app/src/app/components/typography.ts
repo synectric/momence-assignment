@@ -8,6 +8,14 @@ export const H1 = styled.h1`
   margin: 0;
 `;
 
+export const H3 = styled.h3`
+  font-size: 32px;
+  font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: -0.04em;
+  margin: 0;
+`;
+
 export const Body3 = styled.span`
   font-size: 24px;
   line-height: 1.1;

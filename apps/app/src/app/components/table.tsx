@@ -7,7 +7,7 @@ type Props<Column extends string> = {
 
 export const Table = <Column extends string>({ columns, rows }: Props<Column>) => {
   return (
-    <Main>
+    <Main title="Table">
       <Header>
         {columns.map((column) => (
           <div key={column}>{column}</div>
@@ -15,8 +15,8 @@ export const Table = <Column extends string>({ columns, rows }: Props<Column>) =
       </Header>
       {rows.map((row) => (
         <Row key={JSON.stringify(row)}>
-          {Object.values<string>(row).map((cell) => (
-            <div key={cell}>{cell}</div>
+          {Object.entries<string>(row).map(([key, cell]) => (
+            <div key={`${JSON.stringify(row)}-${key}-${cell}`}>{cell}</div>
           ))}
         </Row>
       ))}
@@ -33,7 +33,7 @@ const Main = styled.div`
   flex-direction: column;
   padding: 0 32px;
   text-transform: capitalize;
-  width: 80%;
+  width: 100%;
 `;
 
 const Row = styled.div`
@@ -47,6 +47,11 @@ const Row = styled.div`
 
   &:last-child {
     border-bottom: none;
+  }
+
+  div {
+    flex: 1 0 0;
+    text-align: center;
   }
 `;
 
