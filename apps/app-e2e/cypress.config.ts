@@ -7,10 +7,10 @@ export default defineConfig({
       cypressDir: 'src',
       bundler: 'vite',
       webServerCommands: {
-        default: 'yarn nx run @here/app:dev',
-        production: 'yarn nx run @here/app:preview',
+        default: 'yarn nx run @momence-assignment/app:dev',
+        production: 'yarn nx run @momence-assignment/app:preview',
       },
-      ciWebServerCommand: 'yarn nx run @here/app:preview',
+      ciWebServerCommand: 'yarn nx run @momentce-assignment/app:preview',
       ciBaseUrl: 'http://localhost:4300',
     }),
     baseUrl: 'http://localhost:4200',

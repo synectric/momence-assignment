@@ -27,7 +27,7 @@ export default defineConfig(() => ({
     },
   },
   test: {
-    name: '@here/app',
+    name: '@momence-assignment/app',
     watch: false,
     globals: true,
     environment: 'jsdom',
