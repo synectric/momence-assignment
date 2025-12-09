@@ -11,27 +11,25 @@ type Props = {
 
 const { decimalSeparator, thousandSeparator } = getLocaleSettings();
 
-export const Form = ({ amount, onChange }: Props) => {
-  return (
-    <Main title="Form">
-      <Body4>Enter the amount to convert:</Body4>
-      <NumericFormat
-        allowLeadingZeros={false}
-        allowNegative={false}
-        allowedDecimalSeparators={[decimalSeparator]}
-        customInput={Input}
-        decimalScale={2}
-        inputProps={{ inputMode: 'decimal' }}
-        isAllowed={({ value }) => value.length < 25}
-        name="amount"
-        onValueChange={onChange}
-        thousandSeparator={thousandSeparator}
-        value={amount}
-      />
-      <Body3 style={{ marginLeft: '-8px' }}>CZK</Body3>
-    </Main>
-  );
-};
+export const Form = ({ amount, onChange }: Props) => (
+  <Main title="Form">
+    <Body4>Enter the amount to convert:</Body4>
+    <NumericFormat
+      allowLeadingZeros={false}
+      allowNegative={false}
+      allowedDecimalSeparators={[decimalSeparator]}
+      customInput={Input}
+      decimalScale={2}
+      inputProps={{ inputMode: 'decimal' }}
+      isAllowed={({ value }) => value.length < 25}
+      name="amount"
+      onValueChange={onChange}
+      thousandSeparator={thousandSeparator}
+      value={amount}
+    />
+    <Body3 style={{ marginLeft: '-8px' }}>CZK</Body3>
+  </Main>
+);
 
 const Main = styled.div`
   align-items: center;

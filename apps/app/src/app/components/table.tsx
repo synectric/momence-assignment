@@ -5,24 +5,22 @@ type Props<Column extends string> = {
   rows: Array<Record<Column, string>>;
 };
 
-export const Table = <Column extends string>({ columns, rows }: Props<Column>) => {
-  return (
-    <Main title="Table">
-      <Header>
-        {columns.map((column) => (
-          <div key={column}>{column}</div>
-        ))}
-      </Header>
-      {rows.map((row) => (
-        <Row key={JSON.stringify(row)}>
-          {Object.entries<string>(row).map(([key, cell]) => (
-            <div key={`${JSON.stringify(row)}-${key}-${cell}`}>{cell}</div>
-          ))}
-        </Row>
+export const Table = <Column extends string>({ columns, rows }: Props<Column>) => (
+  <Main title="Table">
+    <Header>
+      {columns.map((column) => (
+        <div key={column}>{column}</div>
       ))}
-    </Main>
-  );
-};
+    </Header>
+    {rows.map((row) => (
+      <Row key={JSON.stringify(row)}>
+        {Object.entries<string>(row).map(([key, cell]) => (
+          <div key={`${JSON.stringify(row)}-${key}-${cell}`}>{cell}</div>
+        ))}
+      </Row>
+    ))}
+  </Main>
+);
 
 const Main = styled.div`
   background: ${({ theme: { palette } }) => palette.background.accent};

@@ -62,7 +62,6 @@ export const Wrapper = styled.div`
   background: ${({ theme: { palette } }) => palette.background.content};
   border-radius: 64px;
   display: flex;
-  flex: 1 0 auto;
   flex-direction: column;
   gap: 32px;
   max-width: 1280px;
